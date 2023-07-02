@@ -1,26 +1,15 @@
-;(async () => {
-  const { Octokit } = require('octokit')
-  require('colors').enable()
-  const didYouMean = require('didyoumean2').default
-  const readline = require('readline').createInterface({ input: process.stdin, output: process.stdout })
-  const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN })
+/**
+ * @param ...inputs: Kelimelerin toplandığı array.
+ * @returns Girilen kelimelerin hepsinin düzeltilmiş halinin bulunduğu bir **array** döndürür
+ * ```js
+ * (async () => {
+ *   const correcter = require('yazim-hatasi-duzeltme')
+ *   await correcter('keliöe') // => [ 'kelime' ]
+ *   await correcter('yprgun', 'yqramaz', 'yaaramaz') // => [ 'yorgun', 'yaramaz', 'yaramaz' ]
+ * })()
+ * ```
+ */
 
-  const b64DecodeUnicode = str => decodeURIComponent(atob(str).split('').map(char => '%' + ('00' + char.charCodeAt(0).toString(16)).slice(-2)).join(''))
+const correcter = require('./function')
 
-  const res = await octokit
-    .request('GET /repos/{owner}/{repo}/contents/{file_path}', {
-      owner: 'maidis',
-      repo: 'mythes-tr',
-      file_path: 'veriler/kelime-listesi.txt'
-    })
-  const kelimeler = b64DecodeUnicode(res.data.content).split(`
-`)
-  readline.question('Bir kelimeyi yanlış yaz: ', word => {
-    const corrected = didYouMean(word, kelimeler)
-    const capitalized = `${corrected.charAt(0).toUpperCase()}${corrected.slice(
-      1
-    )}`
-    console.log(`${capitalized.green} mi demek istedin?`)
-    readline.close()
-  })
-})()
+module.exports = correcter
