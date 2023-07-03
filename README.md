@@ -4,10 +4,8 @@ Girilen hatalı keliemeleri düzeltip, hatasız kelimeleri (tıpa tıp aynı kel
 
 Örnek kod:
 ```js
-(async () => {
-  const correcter = require('yazim-hatasi-duzeltme')
-  await correcter('keliöe') // => [ 'kelime' ]
-  await correcter('yprgun', 'yqramaz', 'yaaramaz') // => [ 'yorgun', 'yaramaz', 'yaramaz' ]
-  await correcter('yaramaz') // => [ 'yaramaz' ]
-})()
+const correcter = require('yazim-hatasi-duzeltme')
+correcter('keliöe') // => [ 'kelime' ]
+correcter('yprgun', 'yqramaz', 'yaaramaz') // => [ 'yorgun', 'yaramaz', 'yaramaz' ]
+correcter('yaramaz') // => [ 'yaramaz' ]
 ```
