@@ -11,5 +11,9 @@
  */
 
 const correcter = require('./function')
+const cumleDuzeltici = require('./cumleDuzelt')
 
-module.exports = correcter
+module.exports = {
+  default: correcter,
+  cumleDuzeltici
+}
